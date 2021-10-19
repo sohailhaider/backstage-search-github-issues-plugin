@@ -12,7 +12,6 @@ export interface GitHubIssueEntityDocument extends IndexableDocument {
 }
 
 export class DefaultGitHubIssuesCollator implements DocumentCollator {
-  protected filter?: CatalogEntitiesRequest['filter'];
   public readonly type: string = 'github-issue';
   protected readonly githubIssuesClient: GitHubIssueApi;
   protected logger: Logger;
@@ -20,7 +19,6 @@ export class DefaultGitHubIssuesCollator implements DocumentCollator {
   static fromConfig(
     _config: Config,
     options: {
-      filter?: CatalogEntitiesRequest['filter']; //just keeping the filters
       logger: Logger;
     },
   ) {
@@ -30,25 +28,21 @@ export class DefaultGitHubIssuesCollator implements DocumentCollator {
   }
 
   constructor({
-    filter,
     logger,
     githubIssuesClient,
   }: {
-    filter?: CatalogEntitiesRequest['filter']; //just keeping the filters
     logger: Logger;
     githubIssuesClient?: GitHubIssueApi;
   }) {
-    this.filter = filter;
     this.logger = logger;
     this.githubIssuesClient = githubIssuesClient || new GitHubIssuesClient();
   }
 
   async execute() {
-    // this.logger.warn(JSON.stringify(await this.githubIssuesClient.getIssues('backstage')));
     const response = await this.githubIssuesClient.getIssues(
       'backstage/backstage',
     );
-    this.logger.warn(JSON.stringify(response));
+    // this.logger.warn(JSON.stringify(response));
     return response.map(
       (ghIssue: GitHubIssueApiEntity): GitHubIssueEntityDocument => {
         return {

@@ -33,6 +33,7 @@ describe('CatalogClient', () => {
     });
 
     it('should fetch entities from correct endpoint', async () => {
+      expect.assertions(1);
       const response = await client.getIssues('backstage/backstage');
       expect(response).toEqual(defaultServiceResponse);
     });
