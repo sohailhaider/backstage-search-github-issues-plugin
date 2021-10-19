@@ -82,7 +82,7 @@ export default async function createPlugin({
 
   // Indexing our Github Issues Documents.
   indexBuilder.addCollator({
-    defaultRefreshIntervalSeconds: 20,
+    defaultRefreshIntervalSeconds: 600,
     collator: DefaultGitHubIssuesCollator.fromConfig(config, {
       logger,
     }),

@@ -45,7 +45,11 @@ export class DefaultGitHubIssuesCollator implements DocumentCollator {
 
   async execute() {
     // this.logger.warn(JSON.stringify(await this.githubIssuesClient.getIssues('backstage')));
-    return (await this.githubIssuesClient.getIssues('backstage/backstage')).map(
+    const response = await this.githubIssuesClient.getIssues(
+      'backstage/backstage',
+    );
+    this.logger.warn(JSON.stringify(response));
+    return response.map(
       (ghIssue: GitHubIssueApiEntity): GitHubIssueEntityDocument => {
         return {
           location: ghIssue.html_url,
