@@ -1,8 +1,6 @@
 import { IndexableDocument, DocumentCollator } from '@backstage/search-common';
 import { Config } from '@backstage/config';
-
-import { CatalogEntitiesRequest } from '@backstage/catalog-client';
-import { Logger } from 'winston';
+// import { Logger } from 'winston';
 import { GitHubIssueApi, GitHubIssueApiEntity } from './types/api';
 import { GitHubIssuesClient } from './utilities/GitHubIssuesClient';
 
@@ -14,27 +12,24 @@ export interface GitHubIssueEntityDocument extends IndexableDocument {
 export class DefaultGitHubIssuesCollator implements DocumentCollator {
   public readonly type: string = 'github-issue';
   protected readonly githubIssuesClient: GitHubIssueApi;
-  protected logger: Logger;
+  // protected logger: Logger;
 
   static fromConfig(
     _config: Config,
-    options: {
-      logger: Logger;
-    },
+    // options: {
+    //   logger: Logger;
+    // },
   ) {
     return new DefaultGitHubIssuesCollator({
-      ...options,
+      // ...options,
     });
   }
 
   constructor({
-    logger,
     githubIssuesClient,
   }: {
-    logger: Logger;
     githubIssuesClient?: GitHubIssueApi;
   }) {
-    this.logger = logger;
     this.githubIssuesClient = githubIssuesClient || new GitHubIssuesClient();
   }
 

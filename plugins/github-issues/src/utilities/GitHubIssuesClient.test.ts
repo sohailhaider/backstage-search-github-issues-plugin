@@ -1,10 +1,7 @@
-// import { Entity } from '@backstage/catalog-model';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { GitHubIssueApiEntity } from '../types/api';
 import { GitHubIssuesClient } from './GitHubIssuesClient';
-// import { CATALOG_FILTER_EXISTS, CatalogListResponse } from './types/api';
-// import { DiscoveryApi } from './types/discovery';
 import { mockGitHubData } from '../mock-data/api-limit-mock';
 
 const server = setupServer();
